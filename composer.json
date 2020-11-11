@@ -1,0 +1,44 @@
+{
+  "name": "patchlevel/enum",
+  "type": "library",
+  "license": "MIT",
+  "description": "Small lightweight library to create enum in PHP without SPLEnum",
+  "keywords": [
+    "enum"
+  ],
+  "homepage": "https://github.com/patchlevel/enum",
+  "authors": [
+    {
+      "name": "Daniel Badura",
+      "email": "d.m.badura@gmail.com"
+    },
+    {
+      "name": "David Badura",
+      "email": "d.a.badura@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.4.12"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.4.3",
+    "spatie/phpunit-snapshot-assertions": "^4.2.3",
+    "vimeo/psalm": "^4.1.1"
+  },
+  "config": {
+    "preferred-install": {
+      "*": "dist"
+    },
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "Patchlevel\\Enum\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Patchlevel\\Enum\\Tests\\": "tests/"
+    }
+  }
+}
