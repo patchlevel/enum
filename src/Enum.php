@@ -17,18 +17,22 @@ use function sprintf;
 abstract class Enum
 {
     /**
-     * @var array<T::*, T>
+     * @psalm-var array<T::*, T>
+     * @var array<string, T>
      */
     private static array $values = [];
 
     /**
-     * @var T::*
+     * @psalm-var T::*
+     * @var string
      */
     private string $value;
 
     /**
      * @psalm-pure
-     * @param T::* $value
+     * @psalm-param T::*
+     *
+     * @param string $value
      */
     final private function __construct(string $value)
     {
@@ -49,7 +53,7 @@ abstract class Enum
     }
 
     /**
-     * @param T $enum
+     * @param static $enum
      *
      * @return bool
      */
@@ -64,9 +68,10 @@ abstract class Enum
     }
 
     /**
-     * @param T::* $value
+     * @psalm-param T::*
+     * @param string $value
      *
-     * @return T
+     * @return static
      */
     public static function fromString(string $value): self
     {
@@ -82,7 +87,8 @@ abstract class Enum
     }
 
     /**
-     * @param T::* $value
+     * @psalm-param T::*
+     * @param string $value
      */
     public static function isValid(string $value): bool
     {
@@ -96,9 +102,10 @@ abstract class Enum
     }
 
     /**
-     * @param static<T>::* $value
+     * @psalm-param T::*
+     * @param string $value
      *
-     * @return static<T>
+     * @return static
      */
     protected static function get(string $value): self
     {
@@ -114,7 +121,10 @@ abstract class Enum
         $constants = (new ReflectionClass(static::class))->getReflectionConstants();
 
         foreach ($constants as $constantReflection) {
-            /** @var T::* $constantValue */
+            /**
+             * @psalm-var T::*
+             * @var string $constantValue
+             */
             $constantValue = $constantReflection->getValue();
 
             if (array_key_exists($constantValue, self::$values)) {
