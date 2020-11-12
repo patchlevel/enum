@@ -11,31 +11,30 @@ use function count;
 use function sprintf;
 
 /**
- * @template T
+ * @psalm-immutable
  */
 trait Enumerated
 {
     /**
-     * @var array<string, T>
+     * @psalm-var array<string, self>
      */
     private static array $values = [];
 
     /**
-     * @var T::*
+     * @psalm-var self::*
      */
     private string $value;
 
     /**
-     * @param T::* $value
+     * @psalm-param self::* $value
      */
-    private function __construct(string $value)
+    final private function __construct(string $value)
     {
         $this->value = $value;
     }
 
     /**
-     * @return array<int, T>
-     * @psalm-return list<T>
+     * @return array<int, self>
      */
     public static function values(): array
     {
@@ -46,24 +45,19 @@ trait Enumerated
         return array_values(self::$values);
     }
 
-    /**
-     * @param T $enum
-     *
-     * @return bool
-     */
     public function equals(self $enum): bool
     {
-        return $this->value === $enum->value;
+        return $this === $enum;
     }
 
+    /**
+     * @psalm-return self::*
+     */
     public function toString(): string
     {
         return $this->value;
     }
 
-    /**
-     * @param T::* $value
-     */
     public static function fromString(string $value): self
     {
         if (!self::$values) {
@@ -78,23 +72,19 @@ trait Enumerated
     }
 
     /**
-     * @param T::* $value
+     * @psalm-assert self::* $value
      */
     public static function isValid(string $value): bool
     {
-        try {
-            self::fromString($value);
-        } catch (EnumException $exception) {
-            return false;
+        if (!self::$values) {
+            self::init();
         }
 
-        return true;
+        return array_key_exists($value, self::$values);
     }
 
     /**
-     * @param T::* $value
-     *
-     * @return T
+     * @psalm-param self::* $value
      */
     private static function get(string $value): self
     {
@@ -110,7 +100,10 @@ trait Enumerated
         $constants = (new ReflectionClass(static::class))->getReflectionConstants();
 
         foreach ($constants as $constantReflection) {
-            /** @var string $constantValue */
+            /**
+             * @var string $constantValue
+             * @psalm-var self::*
+             */
             $constantValue = $constantReflection->getValue();
 
             if (array_key_exists($constantValue, self::$values)) {

@@ -2,14 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Patchlevel\Enum;
+namespace Patchlevel\Enum\Example;
+
+use Patchlevel\Enum\Enumerated;
 
 /**
- * @extends Enum<self>
  * @psalm-immutable
  */
-final class Status extends Enum
+final class Status
 {
+    use Enumerated;
+
     private const CREATED = 'created';
     private const PENDING = 'pending';
     private const RUNNING = 'running';
