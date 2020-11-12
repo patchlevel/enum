@@ -13,7 +13,6 @@ use function sprintf;
 
 /**
  * @psalm-immutable
- * @psalm-method static self self::*()
  */
 trait Enumerated
 {

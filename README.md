@@ -44,3 +44,32 @@ final class Status
     }
 }
 ```
+
+or with static magic call method
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Patchlevel\Enum\Example;
+
+use Patchlevel\Enum\Enumerated;
+
+/**
+ * @psalm-immutable
+ * @method static self created()
+ * @method static self pending()
+ * @method static self running()
+ * @method static self completed()
+ */
+final class Status
+{
+    use Enumerated;
+
+    private const CREATED = 'created';
+    private const PENDING = 'pending';
+    private const RUNNING = 'running';
+    private const COMPLETED = 'completed';
+}
+````

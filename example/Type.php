@@ -8,6 +8,8 @@ use Patchlevel\Enum\Enumerated;
 
 /**
  * @psalm-immutable
+ * @method static self extern()
+ * @method static self intern()
  */
 final class Type
 {
@@ -17,7 +19,4 @@ final class Type
     private const EXTERN = 'extern';
 }
 
-
-$type = Type::extern();
-$type = Type::foo();
-
+$test = Type::intern();
