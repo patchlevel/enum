@@ -72,7 +72,7 @@ trait Enumerated
     }
 
     /**
-     * @psalm-assert self::* $value
+     * @psalm-assert-if-true self::* $value
      */
     public static function isValid(string $value): bool
     {
