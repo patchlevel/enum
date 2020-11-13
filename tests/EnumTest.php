@@ -6,6 +6,7 @@ namespace Patchlevel\Enum\Tests;
 
 use BadMethodCallException;
 use Patchlevel\Enum\EnumException;
+use Patchlevel\Enum\Tests\Enums\BrokenEnum;
 use Patchlevel\Enum\Tests\Enums\Status;
 use Patchlevel\Enum\Tests\Enums\Type;
 use PHPUnit\Framework\TestCase;
@@ -66,6 +67,22 @@ class EnumTest extends TestCase
         self::assertSame($a, $b);
     }
 
+    public function testCreateSameInstanceFromMagic(): void
+    {
+        $a = Type::intern();
+        $b = Type::intern();
+
+        self::assertSame($a, $b);
+    }
+
+    public function testCreateNotSameInstance(): void
+    {
+        $a = Status::created();
+        $b = Status::pending();
+
+        self::assertNotSame($a, $b);
+    }
+
     public function testValid(): void
     {
         self::assertTrue(Status::isValid('created'));
@@ -105,5 +122,12 @@ class EnumTest extends TestCase
             ],
             $values
         );
+    }
+
+    public function testDuplicatedValue(): void
+    {
+        $this->expectException(EnumException::class);
+
+        BrokenEnum::created();
     }
 }
