@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class EnumTest extends TestCase
 {
-    public function testCreateEnum()
+    public function testCreateEnum(): void
     {
         $status = Status::created();
 
@@ -18,7 +18,7 @@ class EnumTest extends TestCase
         self::assertEquals('created', $status->toString());
     }
 
-    public function testCreateFromString()
+    public function testCreateFromString(): void
     {
         $status = Status::fromString('created');
 
@@ -26,14 +26,14 @@ class EnumTest extends TestCase
         self::assertEquals('created', $status->toString());
     }
 
-    public function testCreateFromStringInvalid()
+    public function testCreateFromStringInvalid(): void
     {
         self::expectException(EnumException::class);
 
         Status::fromString('foo');
     }
 
-    public function testCreateSameInstance()
+    public function testCreateSameInstance(): void
     {
         $a = Status::created();
         $b = Status::created();
@@ -41,7 +41,7 @@ class EnumTest extends TestCase
         self::assertSame($a, $b);
     }
 
-    public function testCreateSameInstanceFromString()
+    public function testCreateSameInstanceFromString(): void
     {
         $a = Status::created();
         $b = Status::fromString('created');
@@ -49,17 +49,17 @@ class EnumTest extends TestCase
         self::assertSame($a, $b);
     }
 
-    public function testValid()
+    public function testValid(): void
     {
         self::assertTrue(Status::isValid('created'));
     }
 
-    public function testNotValid()
+    public function testNotValid(): void
     {
         self::assertFalse(Status::isValid('foo'));
     }
 
-    public function testEquals()
+    public function testEquals(): void
     {
         $a = Status::created();
         $b = Status::created();
@@ -67,7 +67,7 @@ class EnumTest extends TestCase
         self::assertTrue($a->equals($b));
     }
 
-    public function testNotEquals()
+    public function testNotEquals(): void
     {
         $a = Status::created();
         $b = Status::completed();
@@ -75,7 +75,7 @@ class EnumTest extends TestCase
         self::assertFalse($a->equals($b));
     }
 
-    public function testValues()
+    public function testValues(): void
     {
         $values = Status::values();
 
