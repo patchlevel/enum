@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum\Tests;
 
+use BadMethodCallException;
 use Patchlevel\Enum\EnumException;
 use Patchlevel\Enum\Tests\Enums\Status;
+use Patchlevel\Enum\Tests\Enums\Type;
 use PHPUnit\Framework\TestCase;
 
 class EnumTest extends TestCase
@@ -26,9 +28,24 @@ class EnumTest extends TestCase
         self::assertEquals('created', $status->toString());
     }
 
+    public function testCreateMagicStaticCall(): void
+    {
+        $type = Type::intern();
+
+        self::assertInstanceOf(Type::class, $type);
+        self::assertEquals('intern', $type->toString());
+    }
+
+    public function testCreateMagicStaticCallInvalid(): void
+    {
+        $this->expectException(BadMethodCallException::class);
+
+        Type::foo();
+    }
+
     public function testCreateFromStringInvalid(): void
     {
-        self::expectException(EnumException::class);
+        $this->expectException(EnumException::class);
 
         Status::fromString('foo');
     }
