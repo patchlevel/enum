@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum\Example;
 
+use Patchlevel\Enum\Enum;
 use Patchlevel\Enum\Enumerated;
 
 /**
  * @psalm-immutable
  */
-final class Status
+final class Status implements Enum
 {
     use Enumerated;
 
