@@ -10,11 +10,6 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
-        <exclude>
-            <directory>src/Infrastructure/Migration</directory>
-            <file>src/Infrastructure/ExceptionCollector.php</file>
-            <file>src/Infrastructure/Kernel.php</file>
-        </exclude>
         <report>
             <html outputDirectory="./coverage"/>
             <text outputFile="php://stdout"/>
