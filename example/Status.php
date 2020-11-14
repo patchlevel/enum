@@ -38,3 +38,5 @@ final class Status
         return self::get(self::COMPLETED);
     }
 }
+
+$test = Status::created();

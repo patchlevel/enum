@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum\Tests;
 
+use BadMethodCallException;
 use Patchlevel\Enum\EnumException;
+use Patchlevel\Enum\Tests\Enums\BrokenEnum;
 use Patchlevel\Enum\Tests\Enums\Status;
+use Patchlevel\Enum\Tests\Enums\Type;
 use PHPUnit\Framework\TestCase;
 
 class EnumTest extends TestCase
@@ -26,9 +29,24 @@ class EnumTest extends TestCase
         self::assertEquals('created', $status->toString());
     }
 
+    public function testCreateMagicStaticCall(): void
+    {
+        $type = Type::intern();
+
+        self::assertInstanceOf(Type::class, $type);
+        self::assertEquals('intern', $type->toString());
+    }
+
+    public function testCreateMagicStaticCallInvalid(): void
+    {
+        $this->expectException(BadMethodCallException::class);
+
+        Type::foo();
+    }
+
     public function testCreateFromStringInvalid(): void
     {
-        self::expectException(EnumException::class);
+        $this->expectException(EnumException::class);
 
         Status::fromString('foo');
     }
@@ -47,6 +65,22 @@ class EnumTest extends TestCase
         $b = Status::fromString('created');
 
         self::assertSame($a, $b);
+    }
+
+    public function testCreateSameInstanceFromMagic(): void
+    {
+        $a = Type::intern();
+        $b = Type::intern();
+
+        self::assertSame($a, $b);
+    }
+
+    public function testCreateNotSameInstance(): void
+    {
+        $a = Status::created();
+        $b = Status::pending();
+
+        self::assertNotSame($a, $b);
     }
 
     public function testValid(): void
@@ -88,5 +122,12 @@ class EnumTest extends TestCase
             ],
             $values
         );
+    }
+
+    public function testDuplicatedValue(): void
+    {
+        $this->expectException(EnumException::class);
+
+        BrokenEnum::created();
     }
 }

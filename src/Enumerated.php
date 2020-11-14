@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum;
 
+use BadMethodCallException;
 use ReflectionClass;
 use function array_key_exists;
 use function array_values;
@@ -58,6 +59,9 @@ trait Enumerated
         return $this->value;
     }
 
+    /**
+     * @throws EnumException
+     */
     public static function fromString(string $value): self
     {
         if (!self::$values) {
@@ -112,5 +116,24 @@ trait Enumerated
 
             self::$values[$constantValue] = new static($constantValue);
         }
+    }
+
+    /**
+     * @psalm-assert self::* $name
+     *
+     * @return static
+     * @throws BadMethodCallException
+     */
+    public static function __callStatic(string $name, array $arguments)
+    {
+        if (!self::$values) {
+            self::init();
+        }
+
+        if (array_key_exists($name, self::$values) === false) {
+            throw new BadMethodCallException("No static method or enum constant '$name' in class " . static::class);
+        }
+
+        return self::$values[$name];
     }
 }
