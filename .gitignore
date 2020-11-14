@@ -1,3 +1,4 @@
+coverage/
 vendor/
 phpunit.xml
 .phpunit.result.cache
