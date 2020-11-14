@@ -5,11 +5,22 @@
             <directory>./tests</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src</directory>
-        </whitelist>
-    </filter>
+
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <exclude>
+            <directory>src/Infrastructure/Migration</directory>
+            <file>src/Infrastructure/ExceptionCollector.php</file>
+            <file>src/Infrastructure/Kernel.php</file>
+        </exclude>
+        <report>
+            <html outputDirectory="./coverage"/>
+            <text outputFile="php://stdout"/>
+        </report>
+    </coverage>
+
     <php>
         <ini name="error_reporting" value="E_ALL"/>
     </php>
