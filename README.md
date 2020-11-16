@@ -111,10 +111,9 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum\Example;
 
-Status::completed();
+$status = Status::completed();
 
-
-$message = match (Status) {
+$message = match ($status) {
     Status::created() => 'Process created',
     Status::pending() => 'Process pending',
     Status::running() => 'Process running',
