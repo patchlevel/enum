@@ -1,6 +1,16 @@
 # enum
 
-## example
+Small lightweight library to create enum in PHP without SPLEnum.
+
+## installation
+
+```
+composer require patchlevel/enum
+```
+
+## declaration
+
+First of all you have to define your enum.
 
 ```php
 <?php
@@ -73,3 +83,46 @@ final class Status
     private const COMPLETED = 'completed';
 }
 ````
+
+## usage
+
+You can now use your enum.
+
+```php
+<?php 
+
+declare(strict_types=1);
+
+namespace Patchlevel\Enum\Example;
+
+$status = Status::completed();
+
+if ($status === Status::completed()) {
+    echo "That's working";
+}
+```
+
+the new "match" syntax, which is added with php 8, also works without problems.
+
+```php
+<?php 
+
+declare(strict_types=1);
+
+namespace Patchlevel\Enum\Example;
+
+Status::completed();
+
+
+$message = match (Status) {
+    Status::created() => 'Process created',
+    Status::pending() => 'Process pending',
+    Status::running() => 'Process running',
+    Status::completed() => 'Process completed',
+    default => 'unknown status',
+};
+
+echo $message; // Process completed
+```
+
+each value only exists once, which is why the strict comparison also works.
