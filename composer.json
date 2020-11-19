@@ -23,7 +23,8 @@
   "require-dev": {
     "ext-json": "^7.4",
     "friendsofphp/php-cs-fixer": "^2.16.7",
-    "phpstan/phpstan": "^0.12.54",
+    "infection/infection": "^0.20.1",
+    "phpstan/phpstan": "^0.12.56",
     "phpunit/phpunit": "^9.4.3",
     "vimeo/psalm": "^4.1.1"
   },
