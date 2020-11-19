@@ -1,48 +1,48 @@
 {
-  "name": "patchlevel/enum",
-  "type": "library",
-  "license": "MIT",
-  "description": "Small lightweight library to create enum in PHP without SPLEnum",
-  "keywords": [
-    "enum"
-  ],
-  "homepage": "https://github.com/patchlevel/enum",
-  "authors": [
-    {
-      "name": "Daniel Badura",
-      "email": "d.m.badura@gmail.com"
+    "name": "patchlevel/enum",
+    "type": "library",
+    "license": "MIT",
+    "description": "Small lightweight library to create enum in PHP without SPLEnum",
+    "keywords": [
+        "enum"
+    ],
+    "homepage": "https://github.com/patchlevel/enum",
+    "authors": [
+        {
+            "name": "Daniel Badura",
+            "email": "d.m.badura@gmail.com"
+        },
+        {
+            "name": "David Badura",
+            "email": "d.a.badura@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4"
     },
-    {
-      "name": "David Badura",
-      "email": "d.a.badura@gmail.com"
-    }
-  ],
-  "require": {
-    "php": "^7.4"
-  },
-  "require-dev": {
-    "ext-json": "^7.4",
-    "friendsofphp/php-cs-fixer": "^2.16.7",
-    "infection/infection": "^0.20.1",
-    "phpstan/phpstan": "^0.12.56",
-    "phpunit/phpunit": "^9.4.3",
-    "vimeo/psalm": "^4.1.1"
-  },
-  "config": {
-    "preferred-install": {
-      "*": "dist"
+    "require-dev": {
+        "ext-json": "^7.4",
+        "friendsofphp/php-cs-fixer": "^2.16.7",
+        "infection/infection": "^0.20.1",
+        "phpstan/phpstan": "^0.12.56",
+        "phpunit/phpunit": "^9.4.3",
+        "vimeo/psalm": "^4.1.1"
     },
-    "sort-packages": true
-  },
-  "autoload": {
-    "psr-4": {
-      "Patchlevel\\Enum\\": "src/"
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Patchlevel\\Enum\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Patchlevel\\Enum\\Tests\\": "tests/",
+            "Patchlevel\\Enum\\Example\\": "example/"
+        }
     }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Patchlevel\\Enum\\Tests\\": "tests/",
-      "Patchlevel\\Enum\\Example\\": "example/"
-    }
-  }
 }
