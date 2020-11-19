@@ -125,3 +125,47 @@ echo $message; // Process completed
 ```
 
 each value only exists once, which is why the strict comparison also works.
+
+## features
+
+### json serializeable
+
+The trait already implements the method `jsonSerialize` from the interface `\JsonSerializable`. This means that you can
+add the `\JsonSerializable` to your own enum and with this `\json_encode` will automatically serialize the value in the
+right manner. Beware that `\json_decode` won't automatically decode it back into the enum. This job must be tackled
+manually. See this example:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace Patchlevel\Enum\Example;
+
+use JsonSerializable;
+use Patchlevel\Enum\Enumerated;
+use function json_encode;
+use const JSON_THROW_ON_ERROR;
+
+/**
+ * @psalm-immutable
+ * @method static self up()
+ * @method static self down()
+ * @method static self left()
+ * @method static self right()
+ */
+final class Direction implements JsonSerializable
+{
+    use Enumerated;
+
+    private const UP = 'up';
+    private const DOWN = 'down';
+    private const LEFT = 'left';
+    private const RIGHT = 'right';
+}
+
+$directionUp = Direction::up();
+
+// this will result int the string "up"
+$encodedDirectionUp = json_encode($directionUp, JSON_THROW_ON_ERROR);
+```

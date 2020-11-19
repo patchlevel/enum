@@ -118,7 +118,7 @@ class EnumTest extends TestCase
                 Status::created(),
                 Status::pending(),
                 Status::running(),
-                Status::completed()
+                Status::completed(),
             ],
             $values
         );
@@ -129,5 +129,24 @@ class EnumTest extends TestCase
         $this->expectException(EnumException::class);
 
         BrokenEnum::created();
+    }
+
+    public function testSerializeAble(): void
+    {
+        $completed = Status::completed();
+        $unserialized = unserialize(serialize($completed));
+
+        self::assertEquals($completed, $unserialized);
+        self::assertNotSame($completed, $unserialized);
+    }
+
+    public function testJsonSerializeAble(): void
+    {
+        $completed = Status::completed();
+
+        $jsonEncoded = json_encode($completed, JSON_THROW_ON_ERROR);
+        $jsonDecoded = json_decode($jsonEncoded, true, 512, JSON_THROW_ON_ERROR);
+
+        self::assertSame($completed, Status::fromString($jsonDecoded));
     }
 }
