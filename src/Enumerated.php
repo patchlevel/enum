@@ -70,6 +70,7 @@ trait Enumerated
 
     /**
      * @psalm-assert self::* $name
+     * @param array<mixed> $arguments
      *
      * @throws BadMethodCallException
      */
