@@ -69,11 +69,6 @@ trait Enumerated
         return array_key_exists($value, self::$values);
     }
 
-    public function equals(self $enum): bool
-    {
-        return $this === $enum;
-    }
-
     /**
      * @psalm-return self::*
      */
