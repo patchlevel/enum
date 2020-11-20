@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum;
 
-use BadMethodCallException;
 use ReflectionClass;
 use function array_key_exists;
+use function array_map;
 use function array_values;
 use function count;
-use function sprintf;
 
 /**
  * @psalm-immutable
@@ -45,14 +44,14 @@ trait Enumerated
     }
 
     /**
-     * @throws EnumException
+     * @throws InvalidValue
      */
     public static function fromString(string $value): self
     {
         self::init();
 
         if (array_key_exists($value, self::$values) === false) {
-            throw new EnumException(sprintf('invalid value "%s"', $value));
+            throw new InvalidValue($value, array_map(static fn (self $value) => $value->toString(), self::$values));
         }
 
         return self::$values[$value];
@@ -72,14 +71,14 @@ trait Enumerated
      * @psalm-assert self::* $name
      * @param array<mixed> $arguments
      *
-     * @throws BadMethodCallException
+     * @throws BadMethodCall
      */
     public static function __callStatic(string $name, array $arguments): self
     {
         self::init();
 
         if (array_key_exists($name, self::$values) === false) {
-            throw new BadMethodCallException("No static method or enum constant '$name' in class " . static::class);
+            throw new BadMethodCall($name, array_map(static fn (self $value) => $value->toString(), self::$values));
         }
 
         return self::$values[$name];
@@ -116,6 +115,9 @@ trait Enumerated
         return self::$values[$value];
     }
 
+    /**
+     * @throws DuplicateValue
+     */
     private static function init(): void
     {
         if (count(self::$values) > 0) {
@@ -132,7 +134,7 @@ trait Enumerated
             $constantValue = $constantReflection->getValue();
 
             if (array_key_exists($constantValue, self::$values)) {
-                throw new EnumException(sprintf('duplicated value "%s"', $constantValue));
+                throw new DuplicateValue($constantValue, static::class);
             }
 
             self::$values[$constantValue] = new static($constantValue);

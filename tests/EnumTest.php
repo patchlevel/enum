@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum\Tests;
 
-use BadMethodCallException;
-use Patchlevel\Enum\EnumException;
+use Patchlevel\Enum\BadMethodCall;
+use Patchlevel\Enum\DuplicateValue;
+use Patchlevel\Enum\InvalidValue;
 use Patchlevel\Enum\Tests\Enums\BrokenEnum;
 use Patchlevel\Enum\Tests\Enums\Status;
 use Patchlevel\Enum\Tests\Enums\Type;
@@ -39,14 +40,16 @@ class EnumTest extends TestCase
 
     public function testCreateMagicStaticCallInvalid(): void
     {
-        $this->expectException(BadMethodCallException::class);
+        $this->expectException(BadMethodCall::class);
+        $this->expectExceptionMessage('Invalid method [::foo()] called. Valid methods are: ::intern(), ::extern()');
 
         Type::foo();
     }
 
     public function testCreateFromStringInvalid(): void
     {
-        $this->expectException(EnumException::class);
+        $this->expectException(InvalidValue::class);
+        $this->expectExceptionMessage('Invalid value [foo] found. Valid values are: created, pending, running, completed');
 
         Status::fromString('foo');
     }
@@ -126,7 +129,8 @@ class EnumTest extends TestCase
 
     public function testDuplicatedValue(): void
     {
-        $this->expectException(EnumException::class);
+        $this->expectException(DuplicateValue::class);
+        $this->expectExceptionMessage('Duplicated value [created] for enum [Patchlevel\Enum\Tests\Enums\BrokenEnum] found');
 
         BrokenEnum::created();
     }

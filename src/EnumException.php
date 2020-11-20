@@ -6,6 +6,9 @@ namespace Patchlevel\Enum;
 
 use RuntimeException;
 
-final class EnumException extends RuntimeException
+/**
+ * @internal
+ */
+abstract class EnumException extends RuntimeException
 {
 }
