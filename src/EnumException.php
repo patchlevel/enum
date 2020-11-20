@@ -6,6 +6,9 @@ namespace Patchlevel\Enum;
 
 use RuntimeException;
 
+/**
+ * @internal
+ */
 abstract class EnumException extends RuntimeException
 {
 }
