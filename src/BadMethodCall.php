@@ -16,7 +16,7 @@ final class BadMethodCall extends EnumException
     public function __construct(string $value, array $values)
     {
         parent::__construct(sprintf(
-            'Invalid method [::%s()] called. Valid values are: %s',
+            'Invalid method [::%s()] called. Valid methods are: %s',
             $value,
             implode(
                 ', ',
