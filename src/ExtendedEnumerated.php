@@ -15,6 +15,14 @@ trait ExtendedEnumerated
     use Enumerated;
 
     /**
+     * @psalm-return self::*
+     */
+    public function jsonSerialize(): string
+    {
+        return $this->toString();
+    }
+
+    /**
      * @psalm-assert self::* $name
      * @param array<mixed> $arguments
      *

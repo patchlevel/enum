@@ -57,7 +57,7 @@ final class Status
 }
 ```
 
-or with static magic call method
+or with static magic call methods, you need to use `ExtendedEnumerated`
 
 ```php
 <?php
@@ -66,7 +66,7 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum\Example;
 
-use Patchlevel\Enum\Enumerated;
+use Patchlevel\Enum\ExtendedEnumerated;
 
 /**
  * @psalm-immutable
@@ -77,7 +77,7 @@ use Patchlevel\Enum\Enumerated;
  */
 final class Status
 {
-    use Enumerated;
+    use ExtendedEnumerated;
 
     private const CREATED = 'created';
     private const PENDING = 'pending';
@@ -145,7 +145,7 @@ declare(strict_types=1);
 namespace Patchlevel\Enum\Example;
 
 use JsonSerializable;
-use Patchlevel\Enum\Enumerated;
+use Patchlevel\Enum\ExtendedEnumerated;
 use function json_encode;
 use const JSON_THROW_ON_ERROR;
 
@@ -158,7 +158,7 @@ use const JSON_THROW_ON_ERROR;
  */
 final class Direction implements JsonSerializable
 {
-    use Enumerated;
+    use ExtendedEnumerated;
 
     private const UP = 'up';
     private const DOWN = 'down';

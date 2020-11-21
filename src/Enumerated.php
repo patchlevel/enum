@@ -83,14 +83,6 @@ trait Enumerated
     }
 
     /**
-     * @psalm-return self::*
-     */
-    public function jsonSerialize(): string
-    {
-        return $this->toString();
-    }
-
-    /**
      * @psalm-param self::* $value
      */
     private static function get(string $value): self
