@@ -18,14 +18,15 @@
         }
     ],
     "require": {
-        "php": "^7.4"
+        "php": "^7.4",
+        "ext-json": "^7.4"
     },
     "require-dev": {
-        "ext-json": "^7.4",
         "friendsofphp/php-cs-fixer": "^2.16.7",
         "infection/infection": "^0.20.1",
         "phpstan/phpstan": "^0.12.56",
         "phpunit/phpunit": "^9.4.3",
+        "symfony/var-dumper": "^5.1",
         "vimeo/psalm": "^4.1.1"
     },
     "config": {

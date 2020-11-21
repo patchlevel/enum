@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum\Tests\Enums;
 
-use Patchlevel\Enum\Enumerated;
+use Patchlevel\Enum\Enum;
 
-final class BrokenEnum
+final class BrokenEnum extends Enum
 {
-    use Enumerated;
-
     private const CREATED = 'created';
     private const PENDING = 'created';
 

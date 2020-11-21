@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum\Tests\Enums;
 
-use JsonSerializable;
-use Patchlevel\Enum\ExtendedEnumerated;
+use Patchlevel\Enum\ExtendedEnum;
 
 /**
  * @psalm-immutable
  * @method static self extern()
  * @method static self intern()
  */
-final class Type implements JsonSerializable
+final class Type extends ExtendedEnum
 {
-    use ExtendedEnumerated;
-
     private const INTERN = 'intern';
     private const EXTERN = 'extern';
 }

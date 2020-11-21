@@ -6,30 +6,24 @@ namespace Patchlevel\Enum;
 
 use Patchlevel\Enum\Exception\DuplicateValue;
 use Patchlevel\Enum\Exception\InvalidValue;
+use Patchlevel\Enum\Exception\InvalidValueType;
 use ReflectionClass;
 use function array_key_exists;
 use function array_map;
 use function array_values;
-use function count;
 
 /**
  * @psalm-immutable
  */
-trait Enumerated
+abstract class Enum
 {
     /**
-     * @psalm-var array<string, self>
+     * @psalm-var array<string, array<string, static>>
      */
-    private static array $values = [];
+    protected static array $values = [];
 
-    /**
-     * @psalm-var self::*
-     */
-    private string $value;
+    protected string $value;
 
-    /**
-     * @psalm-param self::* $value
-     */
     final private function __construct(string $value)
     {
         $this->value = $value;
@@ -42,7 +36,7 @@ trait Enumerated
     {
         self::init();
 
-        return array_values(self::$values);
+        return array_values(self::$values[static::class]);
     }
 
     /**
@@ -52,64 +46,66 @@ trait Enumerated
     {
         self::init();
 
-        if (array_key_exists($value, self::$values) === false) {
-            throw new InvalidValue($value, array_map(static fn (self $value) => $value->toString(), self::$values));
+        if (array_key_exists($value, self::$values[static::class]) === false) {
+            throw new InvalidValue(
+                $value,
+                array_map(
+                    static fn (self $value) => $value->toString(),
+                    self::$values[static::class]
+                )
+            );
         }
 
-        return self::$values[$value];
+        return self::$values[static::class][$value];
     }
 
-    /**
-     * @psalm-assert-if-true self::* $value
-     */
     public static function isValid(string $value): bool
     {
         self::init();
 
-        return array_key_exists($value, self::$values);
+        return array_key_exists($value, self::$values[static::class]);
     }
 
-    /**
-     * @psalm-return self::*
-     */
     public function toString(): string
     {
         return $this->value;
     }
 
     /**
-     * @psalm-param self::* $value
+     * @return static
      */
-    private static function get(string $value): self
+    protected static function get(string $value): self
     {
         self::init();
 
-        return self::$values[$value];
+        return self::$values[static::class][$value];
     }
 
     /**
      * @throws DuplicateValue
      */
-    private static function init(): void
+    protected static function init(): void
     {
-        if (count(self::$values) > 0) {
+        if (array_key_exists(static::class, self::$values)) {
             return;
         }
+
+        self::$values[static::class] = [];
 
         $constants = (new ReflectionClass(static::class))->getReflectionConstants();
 
         foreach ($constants as $constantReflection) {
-            /**
-             * @var string $constantValue
-             * @psalm-var self::*
-             */
             $constantValue = $constantReflection->getValue();
 
-            if (array_key_exists($constantValue, self::$values)) {
+            if (!is_string($constantValue)) {
+                throw new InvalidValueType($constantReflection->getName());
+            }
+
+            if (array_key_exists($constantValue, self::$values[static::class])) {
                 throw new DuplicateValue($constantValue, static::class);
             }
 
-            self::$values[$constantValue] = new static($constantValue);
+            self::$values[static::class][$constantValue] = new static($constantValue);
         }
     }
 }

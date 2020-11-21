@@ -21,15 +21,13 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum\Example;
 
-use Patchlevel\Enum\Enumerated;
+use Patchlevel\Enum\Enum;
 
 /**
  * @psalm-immutable
  */
-final class Status
+final class Status extends Enum
 {
-    use Enumerated;
-
     private const CREATED = 'created';
     private const PENDING = 'pending';
     private const RUNNING = 'running';
@@ -66,7 +64,7 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum\Example;
 
-use Patchlevel\Enum\ExtendedEnumerated;
+use Patchlevel\Enum\ExtendedEnum;
 
 /**
  * @psalm-immutable
@@ -75,10 +73,8 @@ use Patchlevel\Enum\ExtendedEnumerated;
  * @method static self running()
  * @method static self completed()
  */
-final class Status
+final class Status extends ExtendedEnum
 {
-    use ExtendedEnumerated;
-
     private const CREATED = 'created';
     private const PENDING = 'pending';
     private const RUNNING = 'running';
@@ -144,8 +140,7 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum\Example;
 
-use JsonSerializable;
-use Patchlevel\Enum\ExtendedEnumerated;
+use Patchlevel\Enum\ExtendedEnum;
 use function json_encode;
 use const JSON_THROW_ON_ERROR;
 
@@ -156,10 +151,8 @@ use const JSON_THROW_ON_ERROR;
  * @method static self left()
  * @method static self right()
  */
-final class Direction implements JsonSerializable
+final class Direction extends ExtendedEnum
 {
-    use ExtendedEnumerated;
-
     private const UP = 'up';
     private const DOWN = 'down';
     private const LEFT = 'left';

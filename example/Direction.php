@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Patchlevel\Enum\Example;
 
 use const JSON_THROW_ON_ERROR;
-use JsonSerializable;
-use Patchlevel\Enum\ExtendedEnumerated;
+use Patchlevel\Enum\ExtendedEnum;
 use function json_encode;
 
 /**
@@ -16,10 +15,8 @@ use function json_encode;
  * @method static self left()
  * @method static self right()
  */
-final class Direction implements JsonSerializable
+final class Direction extends ExtendedEnum
 {
-    use ExtendedEnumerated;
-
     private const UP = 'up';
     private const DOWN = 'down';
     private const LEFT = 'left';
