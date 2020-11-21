@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum\Example;
 
-use Patchlevel\Enum\ExtendedEnumerated;
 use const JSON_THROW_ON_ERROR;
 use JsonSerializable;
+use Patchlevel\Enum\ExtendedEnumerated;
 use function json_encode;
 
 /**
