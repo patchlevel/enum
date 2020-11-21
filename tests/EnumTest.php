@@ -70,22 +70,6 @@ class EnumTest extends TestCase
         self::assertFalse(Status::isValid('foo'));
     }
 
-    public function testEquals(): void
-    {
-        $a = Status::created();
-        $b = Status::created();
-
-        self::assertTrue($a->equals($b));
-    }
-
-    public function testNotEquals(): void
-    {
-        $a = Status::created();
-        $b = Status::completed();
-
-        self::assertFalse($a->equals($b));
-    }
-
     public function testValues(): void
     {
         $values = Status::values();
