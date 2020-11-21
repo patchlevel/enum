@@ -6,7 +6,9 @@ namespace Patchlevel\Enum\Tests;
 
 use Patchlevel\Enum\Exception\DuplicateValue;
 use Patchlevel\Enum\Exception\InvalidValue;
+use Patchlevel\Enum\Exception\InvalidValueType;
 use Patchlevel\Enum\Tests\Enums\BrokenEnum;
+use Patchlevel\Enum\Tests\Enums\BrokenWithIntegerEnum;
 use Patchlevel\Enum\Tests\Enums\Status;
 use PHPUnit\Framework\TestCase;
 
@@ -91,6 +93,14 @@ class EnumTest extends TestCase
         $this->expectExceptionMessage('Duplicated value [created] for enum [Patchlevel\Enum\Tests\Enums\BrokenEnum] found');
 
         BrokenEnum::created();
+    }
+
+    public function testInvalidType(): void
+    {
+        $this->expectException(InvalidValueType::class);
+        $this->expectExceptionMessage('Invalid value in Patchlevel\Enum\Tests\Enums\BrokenWithIntegerEnum::CREATED. value need to be a string.');
+
+        BrokenWithIntegerEnum::isValid('foo');
     }
 
     public function testSerializable(): void

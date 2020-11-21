@@ -98,7 +98,7 @@ abstract class Enum
             $constantValue = $constantReflection->getValue();
 
             if (!is_string($constantValue)) {
-                throw new InvalidValueType($constantReflection->getName());
+                throw new InvalidValueType(static::class, $constantReflection->getName());
             }
 
             if (array_key_exists($constantValue, self::$values[static::class])) {
