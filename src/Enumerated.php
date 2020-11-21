@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum;
 
-use Patchlevel\Enum\Exception\BadMethodCall;
 use Patchlevel\Enum\Exception\DuplicateValue;
 use Patchlevel\Enum\Exception\InvalidValue;
 use ReflectionClass;
@@ -68,23 +67,6 @@ trait Enumerated
         self::init();
 
         return array_key_exists($value, self::$values);
-    }
-
-    /**
-     * @psalm-assert self::* $name
-     * @param array<mixed> $arguments
-     *
-     * @throws BadMethodCall
-     */
-    public static function __callStatic(string $name, array $arguments): self
-    {
-        self::init();
-
-        if (array_key_exists($name, self::$values) === false) {
-            throw new BadMethodCall($name, array_map(static fn (self $value) => $value->toString(), self::$values));
-        }
-
-        return self::$values[$name];
     }
 
     public function equals(self $enum): bool

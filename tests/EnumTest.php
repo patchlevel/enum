@@ -30,6 +30,13 @@ class EnumTest extends TestCase
         self::assertEquals('created', $status->toString());
     }
 
+    public function testToStringCast(): void
+    {
+        $type = Type::intern();
+
+        self::assertEquals('intern', (string)$type);
+    }
+
     public function testCreateMagicStaticCall(): void
     {
         $type = Type::intern();

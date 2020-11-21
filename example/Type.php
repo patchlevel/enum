@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum\Example;
 
-use Patchlevel\Enum\MagicEnumerated;
+use Patchlevel\Enum\ExtendedEnumerated;
 
 /**
  * @psalm-immutable
@@ -13,7 +13,7 @@ use Patchlevel\Enum\MagicEnumerated;
  */
 final class Type
 {
-    use MagicEnumerated;
+    use ExtendedEnumerated;
 
     private const INTERN = 'intern';
     private const EXTERN = 'extern';

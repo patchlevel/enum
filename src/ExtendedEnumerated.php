@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum;
 
-use BadMethodCallException;
+use Patchlevel\Enum\Exception\BadMethodCall;
 use function array_key_exists;
 
 /**
  * @psalm-immutable
  */
-trait MagicEnumerated
+trait ExtendedEnumerated
 {
     use Enumerated;
 
@@ -18,14 +18,14 @@ trait MagicEnumerated
      * @psalm-assert self::* $name
      * @param array<mixed> $arguments
      *
-     * @throws BadMethodCallException
+     * @throws BadMethodCall
      */
     public static function __callStatic(string $name, array $arguments): self
     {
         self::init();
 
         if (array_key_exists($name, self::$values) === false) {
-            throw new BadMethodCallException("No static method or enum constant '$name' in class " . static::class);
+            throw new BadMethodCall($name, array_map(static fn (self $value) => $value->toString(), self::$values));
         }
 
         return self::$values[$name];
