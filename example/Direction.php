@@ -6,7 +6,7 @@ namespace Patchlevel\Enum\Example;
 
 use const JSON_THROW_ON_ERROR;
 use JsonSerializable;
-use Patchlevel\Enum\Enumerated;
+use Patchlevel\Enum\ExtendedEnumerated;
 use function json_encode;
 
 /**
@@ -18,7 +18,7 @@ use function json_encode;
  */
 final class Direction implements JsonSerializable
 {
-    use Enumerated;
+    use ExtendedEnumerated;
 
     private const UP = 'up';
     private const DOWN = 'down';

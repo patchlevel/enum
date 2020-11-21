@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum\Tests\Enums;
 
-use JsonSerializable;
 use Patchlevel\Enum\Enumerated;
 
-final class Status implements JsonSerializable
+final class Status
 {
     use Enumerated;
 

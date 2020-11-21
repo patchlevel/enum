@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum\Tests;
 
-use Patchlevel\Enum\Exception\BadMethodCall;
 use Patchlevel\Enum\Exception\DuplicateValue;
 use Patchlevel\Enum\Exception\InvalidValue;
 use Patchlevel\Enum\Tests\Enums\BrokenEnum;
 use Patchlevel\Enum\Tests\Enums\Status;
-use Patchlevel\Enum\Tests\Enums\Type;
 use PHPUnit\Framework\TestCase;
 
 class EnumTest extends TestCase
@@ -28,22 +26,6 @@ class EnumTest extends TestCase
 
         self::assertInstanceOf(Status::class, $status);
         self::assertEquals('created', $status->toString());
-    }
-
-    public function testCreateMagicStaticCall(): void
-    {
-        $type = Type::intern();
-
-        self::assertInstanceOf(Type::class, $type);
-        self::assertEquals('intern', $type->toString());
-    }
-
-    public function testCreateMagicStaticCallInvalid(): void
-    {
-        $this->expectException(BadMethodCall::class);
-        $this->expectExceptionMessage('Invalid method [::foo()] called. Valid methods are: ::intern(), ::extern()');
-
-        Type::foo();
     }
 
     public function testCreateFromStringInvalid(): void
@@ -66,14 +48,6 @@ class EnumTest extends TestCase
     {
         $a = Status::created();
         $b = Status::fromString('created');
-
-        self::assertSame($a, $b);
-    }
-
-    public function testCreateSameInstanceFromMagic(): void
-    {
-        $a = Type::intern();
-        $b = Type::intern();
 
         self::assertSame($a, $b);
     }
@@ -135,22 +109,12 @@ class EnumTest extends TestCase
         BrokenEnum::created();
     }
 
-    public function testSerializeAble(): void
+    public function testSerializable(): void
     {
         $completed = Status::completed();
         $unserialized = unserialize(serialize($completed));
 
         self::assertEquals($completed, $unserialized);
         self::assertNotSame($completed, $unserialized);
-    }
-
-    public function testJsonSerializeAble(): void
-    {
-        $completed = Status::completed();
-
-        $jsonEncoded = json_encode($completed, JSON_THROW_ON_ERROR);
-        $jsonDecoded = json_decode($jsonEncoded, true, 512, JSON_THROW_ON_ERROR);
-
-        self::assertSame($completed, Status::fromString($jsonDecoded));
     }
 }
