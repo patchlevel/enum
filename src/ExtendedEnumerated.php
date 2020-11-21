@@ -39,6 +39,9 @@ trait ExtendedEnumerated
         return self::$values[$name];
     }
 
+    /**
+     * @psalm-return self::*
+     */
     public function __toString(): string
     {
         return $this->toString();
