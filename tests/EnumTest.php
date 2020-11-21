@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum\Tests;
 
-use Patchlevel\Enum\BadMethodCall;
-use Patchlevel\Enum\DuplicateValue;
-use Patchlevel\Enum\InvalidValue;
+use Patchlevel\Enum\Exception\BadMethodCall;
+use Patchlevel\Enum\Exception\DuplicateValue;
+use Patchlevel\Enum\Exception\InvalidValue;
 use Patchlevel\Enum\Tests\Enums\BrokenEnum;
 use Patchlevel\Enum\Tests\Enums\Status;
 use Patchlevel\Enum\Tests\Enums\Type;

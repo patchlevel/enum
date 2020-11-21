@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum;
 
+use Patchlevel\Enum\Exception\BadMethodCall;
+use Patchlevel\Enum\Exception\DuplicateValue;
+use Patchlevel\Enum\Exception\InvalidValue;
 use ReflectionClass;
 use function array_key_exists;
 use function array_map;

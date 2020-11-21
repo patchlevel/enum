@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Patchlevel\Enum;
+namespace Patchlevel\Enum\Exception;
 
 use function sprintf;
 
