@@ -9,7 +9,6 @@ use Patchlevel\Enum\Exception\InvalidValue;
 use Patchlevel\Enum\Exception\InvalidValueType;
 use ReflectionClass;
 use function array_key_exists;
-use function array_map;
 use function array_values;
 
 /**
@@ -50,10 +49,7 @@ abstract class Enum
         if (array_key_exists($value, self::$values[static::class]) === false) {
             throw new InvalidValue(
                 $value,
-                array_map(
-                    static fn (self $value) => $value->toString(),
-                    self::$values[static::class]
-                )
+                array_keys(self::$values[static::class])
             );
         }
 

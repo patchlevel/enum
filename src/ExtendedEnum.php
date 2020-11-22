@@ -31,10 +31,7 @@ abstract class ExtendedEnum extends Enum implements JsonSerializable
         if (array_key_exists($name, self::$values[static::class]) === false) {
             throw new BadMethodCall(
                 $name,
-                array_map(
-                    static fn (self $value) => $value->toString(),
-                    self::$values[static::class]
-                )
+                array_keys(self::$values[static::class])
             );
         }
 
