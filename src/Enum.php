@@ -18,6 +18,7 @@ use function array_values;
 abstract class Enum
 {
     /**
+     * @internal
      * @psalm-var array<string, array<string, static>>
      */
     protected static array $values = [];
@@ -87,6 +88,7 @@ abstract class Enum
     }
 
     /**
+     * @internal
      * @throws DuplicateValue
      */
     protected static function init(): void
