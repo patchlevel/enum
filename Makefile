@@ -17,6 +17,9 @@ phpstan:                                                                        
 psalm:                                                                          ## run psalm static code analyser
 	vendor/bin/psalm
 
+infection:                                                                      ## run infection
+	vendor/bin/infection
+
 .PHONY: phpunit
 phpunit:                                                                        ## run phpunit tests
 	vendor/bin/phpunit --testdox --colors=always -v $(OPTIONS)
@@ -28,4 +31,4 @@ static: php-cs-fix phpstan psalm                                                
 test: phpunit                                                                   ## run tests
 
 .PHONY: dev
-dev: static test                                                                ## run dev tools
+dev: static test infection                                                      ## run dev tools

@@ -66,6 +66,11 @@ abstract class Enum
         return array_key_exists($value, self::$values[static::class]);
     }
 
+    public function equals(self $enum): bool
+    {
+        return $this === $enum;
+    }
+
     public function toString(): string
     {
         return $this->value;
