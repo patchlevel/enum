@@ -17,10 +17,9 @@ use function array_values;
 abstract class Enum
 {
     /**
-     * @internal
      * @psalm-var array<string, array<string, static>>
      */
-    protected static array $values = [];
+    private static array $values = [];
 
     protected string $value;
 
@@ -30,7 +29,7 @@ abstract class Enum
     }
 
     /**
-     * @return array<int, self>
+     * @return array<int, static>
      */
     public static function values(): array
     {
@@ -40,7 +39,18 @@ abstract class Enum
     }
 
     /**
+     * @return array<int, string>
+     */
+    public static function keys(): array
+    {
+        self::init();
+
+        return array_keys(self::$values[static::class]);
+    }
+
+    /**
      * @throws InvalidValue
+     * @return static
      */
     public static function fromString(string $value): self
     {
@@ -84,10 +94,9 @@ abstract class Enum
     }
 
     /**
-     * @internal
      * @throws DuplicateValue
      */
-    protected static function init(): void
+    private static function init(): void
     {
         if (array_key_exists(static::class, self::$values)) {
             return;

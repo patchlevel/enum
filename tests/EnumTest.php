@@ -103,6 +103,21 @@ class EnumTest extends TestCase
         );
     }
 
+    public function testKeys(): void
+    {
+        $values = Status::keys();
+
+        self::assertEquals(
+            [
+                'created',
+                'pending',
+                'running',
+                'completed',
+            ],
+            $values
+        );
+    }
+
     public function testDuplicatedValue(): void
     {
         $this->expectException(DuplicateValue::class);
