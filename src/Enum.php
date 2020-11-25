@@ -54,16 +54,6 @@ abstract class Enum
     }
 
     /**
-     * @return array<string, static>
-     */
-    protected static function constants(): array
-    {
-        self::init();
-
-        return self::$constants[static::class];
-    }
-
-    /**
      * @throws InvalidValue
      * @return static
      */
@@ -106,6 +96,17 @@ abstract class Enum
         self::init();
 
         return self::$values[static::class][$value];
+    }
+
+    /**
+     * @internal
+     * @return array<string, static>
+     */
+    protected static function constants(): array
+    {
+        self::init();
+
+        return self::$constants[static::class];
     }
 
     /**
