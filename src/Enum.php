@@ -17,12 +17,12 @@ use function array_values;
 abstract class Enum
 {
     /**
-     * @psalm-var array<string, array<string, static>>
+     * @psalm-var array<class-string, array<string, static>>
      */
     private static array $values = [];
 
     /**
-     * @psalm-var array<string, array<string, static>>
+     * @psalm-var array<class-string, array<string, static>>
      */
     private static array $constants = [];
 
