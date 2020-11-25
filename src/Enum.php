@@ -21,7 +21,7 @@ abstract class Enum
      */
     private static array $values = [];
 
-    protected string $value;
+    private string $value;
 
     final private function __construct(string $value)
     {
