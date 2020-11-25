@@ -25,16 +25,16 @@ abstract class ExtendedEnum extends Enum implements JsonSerializable
      */
     public static function __callStatic(string $name, array $arguments): self
     {
-        $constants = self::constants();
+        $constantMap = self::constantMap();
 
-        if (!array_key_exists($name, $constants)) {
+        if (!array_key_exists($name, $constantMap)) {
             throw new BadMethodCall(
                 $name,
-                array_keys($constants)
+                array_keys($constantMap)
             );
         }
 
-        return $constants[$name];
+        return $constantMap[$name];
     }
 
     public function __toString(): string

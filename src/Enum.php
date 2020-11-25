@@ -19,12 +19,12 @@ abstract class Enum
     /**
      * @psalm-var array<class-string, array<string, static>>
      */
-    private static array $values = [];
+    private static array $valueMap = [];
 
     /**
      * @psalm-var array<class-string, array<string, static>>
      */
-    private static array $constants = [];
+    private static array $constantMap = [];
 
     private string $value;
 
@@ -40,7 +40,7 @@ abstract class Enum
     {
         self::init();
 
-        return array_values(self::$values[static::class]);
+        return array_values(self::$valueMap[static::class]);
     }
 
     /**
@@ -50,7 +50,7 @@ abstract class Enum
     {
         self::init();
 
-        return array_keys(self::$values[static::class]);
+        return array_keys(self::$valueMap[static::class]);
     }
 
     /**
@@ -61,21 +61,21 @@ abstract class Enum
     {
         self::init();
 
-        if (array_key_exists($value, self::$values[static::class]) === false) {
+        if (array_key_exists($value, self::$valueMap[static::class]) === false) {
             throw new InvalidValue(
                 $value,
-                array_keys(self::$values[static::class])
+                array_keys(self::$valueMap[static::class])
             );
         }
 
-        return self::$values[static::class][$value];
+        return self::$valueMap[static::class][$value];
     }
 
     public static function isValid(string $value): bool
     {
         self::init();
 
-        return array_key_exists($value, self::$values[static::class]);
+        return array_key_exists($value, self::$valueMap[static::class]);
     }
 
     public function equals(self $enum): bool
@@ -95,18 +95,18 @@ abstract class Enum
     {
         self::init();
 
-        return self::$values[static::class][$value];
+        return self::$valueMap[static::class][$value];
     }
 
     /**
      * @internal
      * @return array<string, static>
      */
-    protected static function constants(): array
+    protected static function constantMap(): array
     {
         self::init();
 
-        return self::$constants[static::class];
+        return self::$constantMap[static::class];
     }
 
     /**
@@ -114,29 +114,29 @@ abstract class Enum
      */
     private static function init(): void
     {
-        if (array_key_exists(static::class, self::$values)) {
+        if (array_key_exists(static::class, self::$valueMap)) {
             return;
         }
 
-        self::$values[static::class] = [];
+        self::$valueMap[static::class] = [];
 
-        $constants = (new ReflectionClass(static::class))->getReflectionConstants();
+        $constantMap = (new ReflectionClass(static::class))->getReflectionConstants();
 
-        foreach ($constants as $constantReflection) {
+        foreach ($constantMap as $constantReflection) {
             $constantValue = $constantReflection->getValue();
 
             if (!is_string($constantValue)) {
                 throw new InvalidValueType(static::class, $constantReflection->getName());
             }
 
-            if (array_key_exists($constantValue, self::$values[static::class])) {
+            if (array_key_exists($constantValue, self::$valueMap[static::class])) {
                 throw new DuplicateValue($constantValue, static::class);
             }
 
             $enum = new static($constantValue);
 
-            self::$values[static::class][$constantValue] = $enum;
-            self::$constants[static::class][$constantReflection->getName()] = $enum;
+            self::$valueMap[static::class][$constantValue] = $enum;
+            self::$constantMap[static::class][$constantReflection->getName()] = $enum;
         }
     }
 }
