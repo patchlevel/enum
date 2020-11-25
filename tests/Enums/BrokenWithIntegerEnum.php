@@ -6,10 +6,10 @@ namespace Patchlevel\Enum\Tests\Enums;
 
 use Patchlevel\Enum\Enum;
 
-final class BrokenEnum extends Enum
+final class BrokenWithIntegerEnum extends Enum
 {
-    private const CREATED = 'created';
-    private const PENDING = 'created';
+    private const CREATED = 1;
+    private const PENDING = 2;
 
     public static function created(): self
     {

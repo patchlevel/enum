@@ -4,44 +4,38 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum;
 
+use JsonSerializable;
 use Patchlevel\Enum\Exception\BadMethodCall;
-use function array_key_exists;
+use Patchlevel\Enum\Exception\InvalidValue;
 
 /**
  * @psalm-immutable
  */
-trait ExtendedEnumerated
+abstract class ExtendedEnum extends Enum implements JsonSerializable
 {
-    use Enumerated;
-
-    /**
-     * @psalm-return self::*
-     */
     public function jsonSerialize(): string
     {
         return $this->toString();
     }
 
     /**
-     * @psalm-assert self::* $name
      * @param array<mixed> $arguments
+     * @return static
      *
      * @throws BadMethodCall
      */
     public static function __callStatic(string $name, array $arguments): self
     {
-        self::init();
-
-        if (array_key_exists($name, self::$values) === false) {
-            throw new BadMethodCall($name, array_map(static fn (self $value) => $value->toString(), self::$values));
+        try {
+            return static::fromString($name);
+        } catch (InvalidValue $e) {
+            throw new BadMethodCall(
+                $name,
+                static::keys()
+            );
         }
-
-        return self::$values[$name];
     }
 
-    /**
-     * @psalm-return self::*
-     */
     public function __toString(): string
     {
         return $this->toString();

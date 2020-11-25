@@ -6,7 +6,9 @@ namespace Patchlevel\Enum\Tests;
 
 use Patchlevel\Enum\Exception\DuplicateValue;
 use Patchlevel\Enum\Exception\InvalidValue;
+use Patchlevel\Enum\Exception\InvalidValueType;
 use Patchlevel\Enum\Tests\Enums\BrokenEnum;
+use Patchlevel\Enum\Tests\Enums\BrokenWithIntegerEnum;
 use Patchlevel\Enum\Tests\Enums\Status;
 use PHPUnit\Framework\TestCase;
 
@@ -70,6 +72,22 @@ class EnumTest extends TestCase
         self::assertFalse(Status::isValid('foo'));
     }
 
+    public function testEquals(): void
+    {
+        $a = Status::created();
+        $b = Status::created();
+
+        self::assertTrue($a->equals($b));
+    }
+
+    public function testNotEquals(): void
+    {
+        $a = Status::created();
+        $b = Status::completed();
+
+        self::assertFalse($a->equals($b));
+    }
+
     public function testValues(): void
     {
         $values = Status::values();
@@ -85,12 +103,35 @@ class EnumTest extends TestCase
         );
     }
 
+    public function testKeys(): void
+    {
+        $values = Status::keys();
+
+        self::assertEquals(
+            [
+                'created',
+                'pending',
+                'running',
+                'completed',
+            ],
+            $values
+        );
+    }
+
     public function testDuplicatedValue(): void
     {
         $this->expectException(DuplicateValue::class);
         $this->expectExceptionMessage('Duplicated value [created] for enum [Patchlevel\Enum\Tests\Enums\BrokenEnum] found');
 
         BrokenEnum::created();
+    }
+
+    public function testInvalidType(): void
+    {
+        $this->expectException(InvalidValueType::class);
+        $this->expectExceptionMessage('Invalid value in Patchlevel\Enum\Tests\Enums\BrokenWithIntegerEnum::CREATED. value need to be a string.');
+
+        BrokenWithIntegerEnum::isValid('foo');
     }
 
     public function testSerializable(): void
