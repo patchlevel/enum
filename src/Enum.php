@@ -21,6 +21,11 @@ abstract class Enum
      */
     private static array $values = [];
 
+    /**
+     * @psalm-var array<string, array<string, static>>
+     */
+    private static array $constants = [];
+
     private string $value;
 
     final private function __construct(string $value)
@@ -46,6 +51,16 @@ abstract class Enum
         self::init();
 
         return array_keys(self::$values[static::class]);
+    }
+
+    /**
+     * @return array<string, static>
+     */
+    protected static function constants(): array
+    {
+        self::init();
+
+        return self::$constants[static::class];
     }
 
     /**
@@ -117,7 +132,10 @@ abstract class Enum
                 throw new DuplicateValue($constantValue, static::class);
             }
 
-            self::$values[static::class][$constantValue] = new static($constantValue);
+            $enum = new static($constantValue);
+
+            self::$values[static::class][$constantValue] = $enum;
+            self::$constants[static::class][$constantReflection->getName()] = $enum;
         }
     }
 }

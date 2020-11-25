@@ -8,8 +8,8 @@ use Patchlevel\Enum\ExtendedEnum;
 
 /**
  * @psalm-immutable
- * @method static self extern()
- * @method static self intern()
+ * @method static self EXTERN()
+ * @method static self INTERN()
  */
 final class Type extends ExtendedEnum
 {
@@ -17,4 +17,4 @@ final class Type extends ExtendedEnum
     private const EXTERN = 'extern';
 }
 
-$test = Type::intern();
+$test = Type::INTERN();

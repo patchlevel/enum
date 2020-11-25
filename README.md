@@ -68,10 +68,10 @@ use Patchlevel\Enum\ExtendedEnum;
 
 /**
  * @psalm-immutable
- * @method static self created()
- * @method static self pending()
- * @method static self running()
- * @method static self completed()
+ * @method static self CREATED()
+ * @method static self PENDING()
+ * @method static self RUNNING()
+ * @method static self COMPLETED()
  */
 final class Status extends ExtendedEnum
 {
@@ -146,10 +146,10 @@ use const JSON_THROW_ON_ERROR;
 
 /**
  * @psalm-immutable
- * @method static self up()
- * @method static self down()
- * @method static self left()
- * @method static self right()
+ * @method static self UP()
+ * @method static self DOWN()
+ * @method static self LEFT()
+ * @method static self RIGHT()
  */
 final class Direction extends ExtendedEnum
 {
@@ -159,7 +159,7 @@ final class Direction extends ExtendedEnum
     private const RIGHT = 'right';
 }
 
-$directionUp = Direction::up();
+$directionUp = Direction::UP();
 
 // this will result int the string "up"
 $encodedDirectionUp = json_encode($directionUp, JSON_THROW_ON_ERROR);
