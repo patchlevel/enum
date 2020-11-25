@@ -12,14 +12,14 @@ class ExtendedEnumTest extends TestCase
 {
     public function testToStringCast(): void
     {
-        $type = Type::intern();
+        $type = Type::INTERN();
 
         self::assertEquals('intern', (string)$type);
     }
 
     public function testCreateMagicStaticCall(): void
     {
-        $type = Type::intern();
+        $type = Type::INTERN();
 
         self::assertInstanceOf(Type::class, $type);
         self::assertEquals('intern', $type->toString());
@@ -28,22 +28,22 @@ class ExtendedEnumTest extends TestCase
     public function testCreateMagicStaticCallInvalid(): void
     {
         $this->expectException(BadMethodCall::class);
-        $this->expectExceptionMessage('Invalid method [::foo()] called. Valid methods are: ::intern(), ::extern()');
+        $this->expectExceptionMessage('Invalid method [::FOO()] called. Valid methods are: ::INTERN(), ::EXTERN()');
 
-        Type::foo();
+        Type::FOO();
     }
 
     public function testCreateSameInstanceFromMagic(): void
     {
-        $a = Type::intern();
-        $b = Type::intern();
+        $a = Type::INTERN();
+        $b = Type::INTERN();
 
         self::assertSame($a, $b);
     }
 
     public function testJsonSerializable(): void
     {
-        $completed = Type::intern();
+        $completed = Type::INTERN();
 
         $jsonEncoded = json_encode($completed, JSON_THROW_ON_ERROR);
         $jsonDecoded = json_decode($jsonEncoded, true, 512, JSON_THROW_ON_ERROR);

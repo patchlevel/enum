@@ -10,10 +10,10 @@ use function json_encode;
 
 /**
  * @psalm-immutable
- * @method static self up()
- * @method static self down()
- * @method static self left()
- * @method static self right()
+ * @method static self UP()
+ * @method static self DOWN()
+ * @method static self LEFT()
+ * @method static self RIGHT()
  */
 final class Direction extends ExtendedEnum
 {
@@ -23,7 +23,7 @@ final class Direction extends ExtendedEnum
     private const RIGHT = 'right';
 }
 
-$directionUp = Direction::up();
+$directionUp = Direction::UP();
 
 // this will result int the string "up"
 $encodedDirectionUp = json_encode($directionUp, JSON_THROW_ON_ERROR);

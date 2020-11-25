@@ -8,8 +8,8 @@ use Patchlevel\Enum\ExtendedEnum;
 
 /**
  * @psalm-immutable
- * @method static self extern()
- * @method static self intern()
+ * @method static self EXTERN()
+ * @method static self INTERN()
  */
 final class Type extends ExtendedEnum
 {
