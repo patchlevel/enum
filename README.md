@@ -1,4 +1,7 @@
 [![Mutation testing badge](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fpatchlevel%2Fenum%2Fmaster)](https://dashboard.stryker-mutator.io/reports/github.com/patchlevel/enum/master)
+[![Type Coverage](https://shepherd.dev/github/patchlevel/enum/coverage.svg)](https://shepherd.dev/github/patchlevel/enum)
+[![Latest Stable Version](https://poser.pugx.org/patchlevel/enum/v)](//packagist.org/packages/patchlevel/enum)
+[![License](https://poser.pugx.org/patchlevel/enum/license)](//packagist.org/packages/patchlevel/enum)
 
 # enum
 
