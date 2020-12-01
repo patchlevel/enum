@@ -196,7 +196,7 @@ $status = Status::CREATED();
 echo (string)$status; // created
 ```
 
-### json serializeable
+### JsonSerializable
 
 ```php
 $status = Status::CREATED();
