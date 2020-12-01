@@ -61,7 +61,7 @@ final class Status extends Enum
 }
 ```
 
-`self::get()` ensures that exactly one instance of a representation really exists 
+`self::get()` ensures that exactly one instance of a representation really exist 
 so that strict comparisons can be used without problems.
 
 Alternatively, you can inherit the `ExtendEnum`, which comes with a few conveniences, 
