@@ -65,7 +65,7 @@ final class Status extends Enum
 so that strict comparisons can be used without problems.
 
 Alternatively, you can inherit the `ExtendEnum`, which comes with a few conveniences, 
-more about this under [ExtendEnum](#extended enum).
+more about this under [ExtendEnum](#extended-enum).
 
 ## api
 
