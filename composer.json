@@ -2,7 +2,7 @@
     "name": "patchlevel/enum",
     "type": "library",
     "license": "MIT",
-    "description": "Small lightweight library to create enum in PHP without SPLEnum",
+    "description": "Small lightweight library to create enum in PHP without SPLEnum and strict comparisons allowed",
     "keywords": [
         "enum"
     ],
