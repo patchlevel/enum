@@ -105,7 +105,12 @@ $message = match ($status) {
 echo $message; // Process completed
 ```
 
+Strict comparisons are not a problem as it ensures that there is only one instance of a certain value.
+
 ### fromString
+
+You can create an enum from a string. It is checked internally whether the value is valid, 
+otherwise an `InvalidValue` exception is thrown.
 
 ```php
 $status = Status::fromString('pending');
@@ -117,12 +122,16 @@ if ($status === Status::pending()) {
 
 ### toString
 
+The other way around, an enum can also be converted back into a string.
+
 ```php
 $status::completed();
 echo $status->toString(); // completed
 ```
 
 ### equals
+
+The Equals method is just a wrapper for `$a === $b`.
 
 ```php
 $status = Status::completed();
@@ -131,12 +140,16 @@ $status->equals(Status::pending()); // false
 
 ### isValid
 
+isValid can be used to check whether the transferred value is valid. The return value is a boolean.
+
 ```php
 Status::isValid('foo'); // false
 Status::isValid('completed'); // true
 ```
 
 ### values
+
+You can also gat all Enum instances.
 
 ```php
 $instances = Status::values();
@@ -148,6 +161,8 @@ foreach ($instances as $instance) {
 
 ### keys
 
+Or all keys.
+
 ```php
 $keys = Status::keys();
 
@@ -157,6 +172,10 @@ foreach ($keys as $key) {
 ```
 
 ## extended enum
+
+Alternatively, it can also extends from `ExtendedEnum`. 
+This implementation also provides other features, 
+such as. `__toString`.
 
 ```php
 <?php
@@ -184,6 +203,10 @@ final class Status extends ExtendedEnum
 ```
 
 ### __callStatic
+
+This also makes the implementation of the methods unnecessary. 
+With the magic method `__callStatic` is tried to create an Enum instance based on the constant names.
+Otherwise a `BadMethodCall` exception is thrown.
 
 ```php
 $status = Status::CREATED();
