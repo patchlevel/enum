@@ -174,8 +174,8 @@ foreach ($keys as $key) {
 ## extended enum
 
 Alternatively, it can also extends from `ExtendedEnum`. 
-This implementation also provides other features, 
-such as. `__toString`.
+This implementation also provides other features mostly magic methods:
+`__toString`, `__callStatic` and implementing `\JsonSerializable`.
 
 ```php
 <?php
@@ -204,9 +204,8 @@ final class Status extends ExtendedEnum
 
 ### __callStatic
 
-This also makes the implementation of the methods unnecessary. 
-With the magic method `__callStatic` is tried to create an Enum instance based on the constant names.
-Otherwise a `BadMethodCall` exception is thrown.
+With the magic method `__callStatic` it is possible to create an Enum instance based only on the constant names. 
+So no extra method is needed to be defined. If the constant name doesn't exist in the enum a `BadMethodCall` exception is thrown.
 
 ```php
 $status = Status::CREATED();
@@ -214,12 +213,19 @@ $status = Status::CREATED();
 
 ### __toString
 
+Just the magic method implementation of `toString`.
+
 ```php
 $status = Status::CREATED();
 echo (string)$status; // created
 ```
 
 ### JsonSerializable
+
+The ExtendedEnum already implements the method `jsonSerialize` from the interface `\JsonSerializable`. 
+This means that `\json_encode` will automatically serialize the value in the right manner. 
+Beware that `\json_decode` won't automatically decode it back into the enum. This job must be tackled
+manually. See this example:
 
 ```php
 $status = Status::CREATED();
