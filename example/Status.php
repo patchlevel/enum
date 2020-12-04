@@ -36,5 +36,3 @@ final class Status extends Enum
         return self::get(self::COMPLETED);
     }
 }
-
-$test = Status::created();

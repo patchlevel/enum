@@ -16,5 +16,3 @@ final class Type extends ExtendedEnum
     private const INTERN = 'intern';
     private const EXTERN = 'extern';
 }
-
-$test = Type::INTERN();
