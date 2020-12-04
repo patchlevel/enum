@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1b4e01197712f3ba5545b668288e475c",
+    "content-hash": "841949cbe7b1f98bf2966971a7b570e7",
     "packages": [],
     "packages-dev": [
         {
@@ -1285,7 +1285,7 @@
         },
         {
             "name": "patchlevel/coding-standard",
-            "version": "0.2.0",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/patchlevel/coding-standard.git",
@@ -1334,7 +1334,7 @@
             ],
             "support": {
                 "issues": "https://github.com/patchlevel/coding-standard/issues",
-                "source": "https://github.com/patchlevel/coding-standard/tree/0.2.0"
+                "source": "https://github.com/patchlevel/coding-standard/tree/1.0.0"
             },
             "time": "2020-12-04T19:58:05+00:00"
         },
