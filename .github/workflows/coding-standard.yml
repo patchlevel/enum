@@ -1,6 +1,6 @@
 # https://help.github.com/en/categories/automating-your-workflow-with-github-actions
 
-name: "Static Analysis by patchlevel/coding-standard"
+name: "Check Coding Standard"
 
 on:
     pull_request:
