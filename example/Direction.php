@@ -22,8 +22,3 @@ final class Direction extends ExtendedEnum
     private const LEFT = 'left';
     private const RIGHT = 'right';
 }
-
-$directionUp = Direction::UP();
-
-// this will result int the string "up"
-$encodedDirectionUp = json_encode($directionUp, JSON_THROW_ON_ERROR);

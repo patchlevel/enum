@@ -33,7 +33,9 @@ class EnumTest extends TestCase
     public function testCreateFromStringInvalid(): void
     {
         $this->expectException(InvalidValue::class);
-        $this->expectExceptionMessage('Invalid value [foo] found. Valid values are: created, pending, running, completed');
+        $this->expectExceptionMessage(
+            'Invalid value [foo] found. Valid values are: created, pending, running, completed'
+        );
 
         Status::fromString('foo');
     }
@@ -121,7 +123,9 @@ class EnumTest extends TestCase
     public function testDuplicatedValue(): void
     {
         $this->expectException(DuplicateValue::class);
-        $this->expectExceptionMessage('Duplicated value [created] for enum [Patchlevel\Enum\Tests\Enums\BrokenEnum] found');
+        $this->expectExceptionMessage(
+            'Duplicated value [created] for enum [Patchlevel\Enum\Tests\Enums\BrokenEnum] found'
+        );
 
         BrokenEnum::created();
     }
@@ -129,7 +133,9 @@ class EnumTest extends TestCase
     public function testInvalidType(): void
     {
         $this->expectException(InvalidValueType::class);
-        $this->expectExceptionMessage('Invalid value in Patchlevel\Enum\Tests\Enums\BrokenWithIntegerEnum::CREATED. value need to be a string.');
+        $this->expectExceptionMessage(
+            'Invalid value in Patchlevel\Enum\Tests\Enums\BrokenWithIntegerEnum::CREATED. value need to be a string.'
+        );
 
         BrokenWithIntegerEnum::isValid('foo');
     }
