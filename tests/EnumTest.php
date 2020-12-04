@@ -12,6 +12,9 @@ use Patchlevel\Enum\Tests\Enums\BrokenWithIntegerEnum;
 use Patchlevel\Enum\Tests\Enums\Status;
 use PHPUnit\Framework\TestCase;
 
+use function serialize;
+use function unserialize;
+
 class EnumTest extends TestCase
 {
     public function testCreateEnum(): void

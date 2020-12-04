@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Patchlevel\Enum\Example;
 
-use const JSON_THROW_ON_ERROR;
 use Patchlevel\Enum\ExtendedEnum;
-use function json_encode;
 
 /**
  * @psalm-immutable

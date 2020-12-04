@@ -8,6 +8,11 @@ use Patchlevel\Enum\Exception\BadMethodCall;
 use Patchlevel\Enum\Tests\Enums\Type;
 use PHPUnit\Framework\TestCase;
 
+use function json_decode;
+use function json_encode;
+
+use const JSON_THROW_ON_ERROR;
+
 class ExtendedEnumTest extends TestCase
 {
     public function testToStringCast(): void

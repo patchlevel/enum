@@ -8,22 +8,21 @@ use Patchlevel\Enum\Exception\DuplicateValue;
 use Patchlevel\Enum\Exception\InvalidValue;
 use Patchlevel\Enum\Exception\InvalidValueType;
 use ReflectionClass;
+
 use function array_key_exists;
+use function array_keys;
 use function array_values;
+use function is_string;
 
 /**
  * @psalm-immutable
  */
 abstract class Enum
 {
-    /**
-     * @psalm-var array<class-string, array<string, static>>
-     */
+    /** @psalm-var array<class-string, array<string, static>> */
     private static array $valueMap = [];
 
-    /**
-     * @psalm-var array<class-string, array<string, static>>
-     */
+    /** @psalm-var array<class-string, array<string, static>> */
     private static array $constantMap = [];
 
     private string $value;
@@ -54,8 +53,9 @@ abstract class Enum
     }
 
     /**
-     * @throws InvalidValue
      * @return static
+     *
+     * @throws InvalidValue
      */
     public static function fromString(string $value): self
     {
@@ -100,6 +100,7 @@ abstract class Enum
 
     /**
      * @internal
+     *
      * @return array<string, static>
      */
     protected static function constantMap(): array

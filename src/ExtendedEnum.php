@@ -7,6 +7,9 @@ namespace Patchlevel\Enum;
 use JsonSerializable;
 use Patchlevel\Enum\Exception\BadMethodCall;
 
+use function array_key_exists;
+use function array_keys;
+
 /**
  * @psalm-immutable
  */
@@ -19,6 +22,7 @@ abstract class ExtendedEnum extends Enum implements JsonSerializable
 
     /**
      * @param array<mixed> $arguments
+     *
      * @return static
      *
      * @throws BadMethodCall

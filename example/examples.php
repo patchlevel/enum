@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 use Patchlevel\Enum\Example\Direction;
 use Patchlevel\Enum\Example\Status;
 use Patchlevel\Enum\Example\Type;
