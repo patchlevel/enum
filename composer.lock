@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed2b18008771c72571bd9030d2f4df4c",
+    "content-hash": "1b4e01197712f3ba5545b668288e475c",
     "packages": [],
     "packages-dev": [
         {
@@ -1285,16 +1285,16 @@
         },
         {
             "name": "patchlevel/coding-standard",
-            "version": "0.1.0",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/patchlevel/coding-standard.git",
-                "reference": "10ea32167de534654ac582be0c2aebd42eb282dc"
+                "reference": "92b6f1a765e8206f59f6d84f23b6b72d18f409c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/patchlevel/coding-standard/zipball/10ea32167de534654ac582be0c2aebd42eb282dc",
-                "reference": "10ea32167de534654ac582be0c2aebd42eb282dc",
+                "url": "https://api.github.com/repos/patchlevel/coding-standard/zipball/92b6f1a765e8206f59f6d84f23b6b72d18f409c9",
+                "reference": "92b6f1a765e8206f59f6d84f23b6b72d18f409c9",
                 "shasum": ""
             },
             "require": {
@@ -1311,14 +1311,15 @@
             "authors": [
                 {
                     "name": "Daniel Badura",
-                    "email": "d.m.badura@googlemail.com"
+                    "email": "d.m.badura@gmail.com"
                 },
                 {
                     "name": "David Badura",
-                    "email": "d.a.badura@googlemail.com"
+                    "email": "d.a.badura@gmail.com"
                 }
             ],
             "description": "The Patchlevel Coding Standard is a set of PHPCS rules applied to all Patchlevel projects.",
+            "homepage": "https://github.com/patchlevel/coding-standard",
             "keywords": [
                 "checks",
                 "code",
@@ -1333,9 +1334,9 @@
             ],
             "support": {
                 "issues": "https://github.com/patchlevel/coding-standard/issues",
-                "source": "https://github.com/patchlevel/coding-standard/tree/0.1.0"
+                "source": "https://github.com/patchlevel/coding-standard/tree/0.2.0"
             },
-            "time": "2020-12-04T18:41:20+00:00"
+            "time": "2020-12-04T19:58:05+00:00"
         },
         {
             "name": "phar-io/manifest",
