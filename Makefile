@@ -1,13 +1,13 @@
 help:                                                                           ## shows this help
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_\-\.]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-.PHONY: php-cs-check
-php-cs-check:                                                                   ## run cs fixer (dry-run)
-	vendor/bin/php-cs-fixer fix --diff --dry-run
+.PHONY: phpcs-check
+phpcs-check:                                                                   ## run phpcs
+	vendor/bin/phpcs
 
-.PHONY: php-cs-fix
-php-cs-fix:                                                                     ## run cs fixer
-	vendor/bin/php-cs-fixer fix
+.PHONY: phpcs-fix
+phpcs-fix:                                                                     ## run phpcs fixer
+	vendor/bin/phpcbf
 
 .PHONY: phpstan
 phpstan:                                                                        ## run phpstan static code analyser
@@ -25,7 +25,7 @@ phpunit:                                                                        
 	vendor/bin/phpunit --testdox --colors=always -v $(OPTIONS)
 
 .PHONY: static
-static: php-cs-fix phpstan psalm                                                ## run static analyser
+static: phpcs-check phpstan psalm                                                ## run static analyser
 
 .PHONY: test
 test: phpunit                                                                   ## run tests
