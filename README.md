@@ -61,11 +61,11 @@ final class Status extends Enum
 }
 ```
 
-`self::get()` ensures that exactly one instance of a representation really exist 
+`self::get()` ensures that exactly one instance of a representation really exists 
 so that strict comparisons can be used without problems.
 
-Alternatively, you can inherit the `ExtendEnum`, which comes with a few conveniences, 
-more about this under [ExtendEnum](#extended-enum).
+Alternatively, you can inherit the `ExtendedEnum`, which comes with a few conveniences, 
+more about this under [ExtendedEnum](#extended-enum).
 
 ## api
 
@@ -149,7 +149,7 @@ Status::isValid('completed'); // true
 
 ### values
 
-You can also gat all Enum instances.
+You can also get all Enum instances.
 
 ```php
 $instances = Status::values();
@@ -173,7 +173,7 @@ foreach ($keys as $key) {
 
 ## extended enum
 
-Alternatively, it can also extends from `ExtendedEnum`. 
+Alternatively, it can also extend from `ExtendedEnum`. 
 This implementation also provides other features mostly magic methods:
 `__toString`, `__callStatic` and implementing `\JsonSerializable`.
 
