@@ -5,7 +5,13 @@
 
 # enum
 
+
 Small lightweight library to create enum in PHP without SPLEnum and strict comparisons allowed.
+
+## dislcaimer
+
+For project that are build on PHP >=8.1 please use the language build in Enums described in this rfc: https://wiki.php.net/rfc/enumerations
+This library should not be needed anymore and will not support PHP >8.1.
 
 ## installation
 
