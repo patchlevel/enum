@@ -22,7 +22,7 @@
         "ext-json": "^7.4|^8.0"
     },
     "require-dev": {
-        "infection/infection": "^0.26.0",
+        "infection/infection": "^0.27.0",
         "patchlevel/coding-standard": "^1.0.0",
         "phpstan/phpstan": "^0.12.58",
         "phpunit/phpunit": "^9.4.4",
